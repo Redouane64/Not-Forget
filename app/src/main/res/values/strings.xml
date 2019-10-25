@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Not Forgot</string>
+    <string name="login_title">Log in</string>
+    <string name="email_autofill_hint">your e-mail address.</string>
 </resources>
