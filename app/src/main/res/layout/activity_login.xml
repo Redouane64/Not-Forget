@@ -35,28 +35,38 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="14"
+                android:autofillHints="@string/email_autofill_hint"
                 android:inputType="textEmailAddress"
-                android:textSize="20sp"
-                android:autofillHints="@string/email_autofill_hint" />
+                android:singleLine="true"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="14"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:textSize="20sp"
-                android:importantForAutofill="no" />
+                android:singleLine="true"
+                android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/main_orange"
                 android:text="@string/login_title"
                 android:textColor="@color/white"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"/>
+
+            <Button
+                android:id="@+id/signUpbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/grey"
+                android:text="@string/sign_in"
+                android:textColor="@color/dark_grey"
+                android:elevation="8dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
