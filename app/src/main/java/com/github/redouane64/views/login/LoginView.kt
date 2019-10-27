@@ -13,4 +13,5 @@ interface LoginView : BaseView<LoginPresenter> {
     fun showErrorMessage(message: String);
     fun enableLoginButton();
     fun disableLoginButton();
+    fun skipLogin();
 }

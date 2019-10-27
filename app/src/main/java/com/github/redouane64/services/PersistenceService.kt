@@ -5,7 +5,7 @@ package com.github.redouane64.services
 // key/value stores, for example use android SharedPrefrences
 // or SQLite..etc
 interface PersistenceService {
-    fun <T: Any> save(key: String, value: T);
-    fun <T: Any?> retrieve(key: String) : T?;
+    fun save(key: String, value: Any);
+    fun <T> retrieve(key: String, clazz: Class<T>) : Any?;
 }
 

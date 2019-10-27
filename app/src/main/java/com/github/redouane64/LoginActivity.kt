@@ -1,6 +1,7 @@
 package com.github.redouane64
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -54,6 +55,14 @@ class LoginActivity : AppCompatActivity(), LoginView {
         showMessage(R.string.login_succeeded);
     }
 
+    // Navigate to main activity.
+    override fun skipLogin() {
+
+        val mainActivityIntent = Intent(this, MainActivity::class.java);
+        startActivity(mainActivityIntent);
+        finish();
+    }
+
     override fun setPresenter(presenter: LoginPresenter) {
         this.presenter = presenter;
     }
@@ -75,7 +84,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         val client = ApiClient.create();
         val accountService = AccountService(client);
         val keyValueStore : PersistenceService = SharedPreferencesStore(
-            this.getSharedPreferences("login store", Context.MODE_PRIVATE));
+            this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE));
         this.setPresenter(LoginPresenter(this, accountService, keyValueStore));
 
         // attach click handlers.
@@ -93,5 +102,11 @@ class LoginActivity : AppCompatActivity(), LoginView {
             }
 
         }
+
+        // check if user logged in.
+        if(this.presenter.isLoggedIn()) {
+            this.skipLogin();
+        }
+
     }
 }
