@@ -3,4 +3,6 @@
     <string name="login_title">Log in</string>
     <string name="email_autofill_hint">your e-mail address.</string>
     <string name="sign_in">Sign Up</string>
+    <string name="enter_your_login">Enter your login.</string>
+    <string name="login_succeeded">Logged in  successfully.</string>
 </resources>

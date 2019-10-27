@@ -6,4 +6,11 @@ import com.github.redouane64.views.BaseView
 
 interface LoginView : BaseView<LoginPresenter> {
     fun login(credentials: LoginCredentials);
+    fun canLogin() : Boolean;
+    fun showMessage(resId: Int);
+    fun showMessage(message: String);
+    fun showLogInSuccessfulMessage();
+    fun showErrorMessage(message: String);
+    fun enableLoginButton();
+    fun disableLoginButton();
 }

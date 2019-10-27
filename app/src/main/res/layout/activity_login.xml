@@ -51,13 +51,11 @@
 
             <Button
                 android:id="@+id/loginButton"
+                style="@style/enabledButton"
+                android:backgroundTint="@color/button_tint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/main_orange"
-                android:text="@string/login_title"
-                android:textColor="@color/white"
-                android:layout_marginTop="20dp"
-                android:elevation="8dp"/>
+                android:text="@string/login_title" />
 
             <Button
                 android:id="@+id/signUpbutton"
