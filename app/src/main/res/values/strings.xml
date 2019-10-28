@@ -4,5 +4,6 @@
     <string name="email_autofill_hint">your e-mail address.</string>
     <string name="sign_in">Sign Up</string>
     <string name="enter_your_login">Enter your login.</string>
-    <string name="login_succeeded">Logged in  successfully.</string>
+    <string name="login_succeeded">Logged in successfully.</string>
+    <string name="logged_in">Logged in.</string>
 </resources>
