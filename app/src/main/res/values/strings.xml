@@ -6,4 +6,5 @@
     <string name="enter_your_login">Enter your login.</string>
     <string name="login_succeeded">Logged in successfully.</string>
     <string name="logged_in">Logged in.</string>
+    <string name="title_activity_tasks">Not Forgot!</string>
 </resources>

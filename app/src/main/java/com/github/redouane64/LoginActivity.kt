@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
     // Navigate to main activity.
     override fun skipLogin() {
 
-        val tasksActivityIntent = Intent(this, null /* TODO: set to an activity*/);
+        val tasksActivityIntent = Intent(this, TasksActivity::class.java);
         startActivity(tasksActivityIntent);
         finish();
     }
