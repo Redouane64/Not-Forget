@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/main_orange</item>
     </style>
 
-    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashScreenTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowTranslucentStatus">true</item>
