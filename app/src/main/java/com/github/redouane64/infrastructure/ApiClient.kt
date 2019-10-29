@@ -15,13 +15,13 @@ interface ApiClient {
     fun login(@Body credentials: LoginCredentials): Call<ApiToken>
 
     @GET("tasks")
-    fun getTasks(@Header("Autherization") token: String): Call<List<Task>>;
+    fun getTasks(@Header("Authorization") token: String): Call<List<Task>>;
 
     @POST("tasks")
-    fun createTask(@Header("Autherization") token: String, @Body task: Task): Call<Void>;
+    fun createTask(@Header("Authorization") token: String, @Body task: Task): Call<Void>;
 
     @DELETE("tasks")
-    fun removeTask(@Header("Autherization") token: String, @Path("{id}") id: Int);
+    fun removeTask(@Header("Authorization") token: String, @Path("{id}") id: Int);
 
     companion object {
 
@@ -37,6 +37,7 @@ interface ApiClient {
 
         const val OkStatusCode = 200;
         const val NotFound = 404;
-        const val Bearer = "Bearer"
+        // by default our Api auth schema is Bearer.
+        const val AuthenticationSchema = "AuthenticationSchema"
     }
 }
