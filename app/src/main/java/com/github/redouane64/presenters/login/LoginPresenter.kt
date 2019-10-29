@@ -14,7 +14,7 @@ class LoginPresenter(var view: LoginView?,
                      var keyValueStore: PersistenceService) : BasePresenter {
 
     companion object {
-        private val API_TOKEN = "API_TOKEN";
+        const val API_TOKEN = "API_TOKEN";
     }
 
     override fun onDestroy() {

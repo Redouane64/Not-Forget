@@ -27,4 +27,9 @@ class TasksActivity : AppCompatActivity(), TasksView {
         }
     }
 
+    override fun onDestroy() {
+        this.presenter.onDestroy();
+        super.onDestroy()
+    }
+
 }
