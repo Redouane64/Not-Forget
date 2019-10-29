@@ -31,7 +31,7 @@ class LoginPresenter(var view: LoginView?,
         val token = this.keyValueStore.retrieve(API_TOKEN, String::class.java);
 
         if(token != null) {
-            view?.showMessage(R.string.logged_in)
+            view?.showMessage(R.string.logged_in) // TODO: replace this
             return true;
         }
 

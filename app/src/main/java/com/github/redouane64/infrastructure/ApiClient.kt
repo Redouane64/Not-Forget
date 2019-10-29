@@ -38,6 +38,6 @@ interface ApiClient {
         const val OkStatusCode = 200;
         const val NotFound = 404;
         // by default our Api auth schema is Bearer.
-        const val AuthenticationSchema = "AuthenticationSchema"
+        const val AuthenticationSchema = "Bearer"
     }
 }

@@ -14,10 +14,17 @@ class TasksService(private val apiClient: ApiClient) {
                  onFailure: (ApiError) -> Unit,
                  onSuccess: (List<Task>) -> Unit) {
 
-        apiClient.getTasks("$ApiClient.Bearer $token").enqueue(GetTasksListCallback(onFailure, onSuccess));
+        // pass bearer authorization header in form of bearer <token>.
+        apiClient.getTasks("${ApiClient.AuthenticationSchema} $token").enqueue(GetTasksListCallback(onFailure, onSuccess));
     }
 
     fun createTask(token: String,
+                   onFailure: (ApiError) -> Unit,
+                   onSuccess: () -> Unit) {
+
+    }
+
+    fun removeTask(token: String,
                    onFailure: (ApiError) -> Unit,
                    onSuccess: () -> Unit) {
 
