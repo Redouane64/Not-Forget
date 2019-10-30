@@ -24,9 +24,9 @@ class TasksActivity : AppCompatActivity(), TasksView {
         this.presenter = presenter;
     }
 
-    override fun createList(list: List<Task>) {
+    override fun createTasksList(list: List<Task>, tasksPresenter: TasksPresenter) {
         tasksList.layoutManager = LinearLayoutManager(this);
-        tasksList.adapter = TasksListAdapter(list);
+        tasksList.adapter = TasksListAdapter(list, tasksPresenter);
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

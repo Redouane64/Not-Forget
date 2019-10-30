@@ -5,5 +5,5 @@ import com.github.redouane64.presenters.tasks.TasksPresenter
 import com.github.redouane64.views.BaseView
 
 interface TasksView : BaseView<TasksPresenter> {
-    fun createList(list: List<Task>);
+    fun createTasksList(list: List<Task>, tasksPresenter: TasksPresenter);
 }

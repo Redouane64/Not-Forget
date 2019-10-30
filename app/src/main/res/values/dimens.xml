@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="title_size">24sp</dimen>
+    <dimen name="placeholder_padding">16dp</dimen>
 </resources>
