@@ -1,15 +1,12 @@
 package com.github.redouane64.infrastructure
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.redouane64.R
 import com.github.redouane64.models.Task
-import com.github.redouane64.presenters.tasks.TasksPresenter
 
-class TasksListAdapter(private val tasks: List<Task>,
-                       private val tasksPresenter: TasksPresenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TasksListAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val EMPTY_VIEW = 0;
     private val LOADING = 1
@@ -30,12 +27,7 @@ class TasksListAdapter(private val tasks: List<Task>,
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(tasks.isEmpty() && !tasksPresenter.isFetchingTasks())
-            EMPTY_VIEW;
-        else if(tasksPresenter.isFetchingTasks())
-            LOADING;
-        else
-            LOADED;
+        return LOADED;
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

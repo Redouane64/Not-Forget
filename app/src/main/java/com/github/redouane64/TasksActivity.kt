@@ -19,14 +19,22 @@ import kotlinx.android.synthetic.main.content_tasks.*
 class TasksActivity : AppCompatActivity(), TasksView {
 
     private lateinit var presenter: TasksPresenter;
+    private lateinit var taskListAdapter: TasksListAdapter;
 
     override fun setPresenter(presenter: TasksPresenter) {
         this.presenter = presenter;
     }
 
-    override fun createTasksList(list: List<Task>, tasksPresenter: TasksPresenter) {
-        tasksList.layoutManager = LinearLayoutManager(this);
-        tasksList.adapter = TasksListAdapter(list, tasksPresenter);
+    override fun createTasksList(list: List<Task>) {
+
+    }
+
+    override fun getListAdapter() : TasksListAdapter {
+        return this.taskListAdapter;
+    }
+
+    override fun setTasks(tasks: List<Task>) {
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +51,8 @@ class TasksActivity : AppCompatActivity(), TasksView {
             SharedPreferencesStore(this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE)),
             TasksService(ApiClient.create())
         );
-
         this.setPresenter(tasksPresenter);
-        this.presenter.fetchTasks();
+
     }
 
     override fun onDestroy() {

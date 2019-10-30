@@ -13,6 +13,7 @@ class TasksPresenter(private var view: TasksView?,
                      private var tasksService: TasksService) : BasePresenter {
 
     private var isLoadingTasks = false;
+    private lateinit var tasks : List<Task>;
 
     override fun onDestroy() {
         this.view = null;
@@ -29,11 +30,12 @@ class TasksPresenter(private var view: TasksView?,
     fun isFetchingTasks() = isLoadingTasks;
 
     private fun onTasksFetched(tasks: List<Task>) {
-        isLoadingTasks = false;
-        view?.createTasksList(tasks, this);
+        this.tasks = tasks;
+        // view?.createTasksList(tasks);
+
     }
 
     private fun onTasksFailure(error: ApiError) {
-        isLoadingTasks = false;
+        // view?.createTasksList(listOf<Task>());
     }
 }
