@@ -12,30 +12,21 @@ class TasksPresenter(private var view: TasksView?,
                      private val keyValueStore: PersistenceService,
                      private var tasksService: TasksService) : BasePresenter {
 
-    private var isLoadingTasks = false;
-    private lateinit var tasks : List<Task>;
-
     override fun onDestroy() {
         this.view = null;
     }
 
-    fun fetchTasks() {
-
-        isLoadingTasks = true;
+    public fun fetchTasks() {
         var token = keyValueStore.retrieve<String>(LoginPresenter.API_TOKEN, String::class.java);
         tasksService.getTasks(token!!, { error -> onTasksFailure(error) }, { tasks -> onTasksFetched(tasks) });
 
     }
 
-    fun isFetchingTasks() = isLoadingTasks;
-
     private fun onTasksFetched(tasks: List<Task>) {
-        this.tasks = tasks;
-        // view?.createTasksList(tasks);
-
+        this.view?.displayTasks(tasks);
     }
 
     private fun onTasksFailure(error: ApiError) {
-        // view?.createTasksList(listOf<Task>());
+        this.view?.displayTasks(listOf());
     }
 }
