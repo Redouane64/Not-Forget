@@ -31,7 +31,7 @@ class LoginPresenter(var view: LoginView?,
         val token = this.keyValueStore.retrieve(API_TOKEN, String::class.java);
 
         if(token != null) {
-            view?.showMessage(R.string.logged_in) // TODO: replace this
+            view?.getDialogProvider()!!.showMessage(R.string.logged_in) // TODO: replace this
             return true;
         }
 
@@ -39,12 +39,12 @@ class LoginPresenter(var view: LoginView?,
     }
 
     private fun onFailedLogin(apiError: ApiError) {
-        view?.showErrorMessage(apiError.message);
+        view?.getDialogProvider()!!.showErrorMessage(apiError.message);
         view?.enableLoginButton();
     }
 
     private fun onSuccessLogin(apiToken: ApiToken) {
-        view?.showLogInSuccessfulMessage();
+        view?.showLoginSucceededMessage();
         view?.enableLoginButton();
 
         this.keyValueStore.save(API_TOKEN, apiToken.apiToken);
