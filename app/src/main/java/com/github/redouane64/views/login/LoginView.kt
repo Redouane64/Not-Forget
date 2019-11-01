@@ -8,7 +8,6 @@ import com.github.redouane64.infrastructure.DialogProvider
 interface LoginView : BaseView<LoginPresenter> {
     fun login(credentials: LoginCredentials);
     fun canLogin() : Boolean;
-    fun getDialogProvider(): DialogProvider;
     fun showLoginSucceededMessage();
     fun enableLoginButton();
     fun disableLoginButton();

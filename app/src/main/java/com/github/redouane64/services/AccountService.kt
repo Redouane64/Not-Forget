@@ -1,9 +1,11 @@
 package com.github.redouane64.services
 
+import android.util.Log
 import com.github.redouane64.infrastructure.ApiClient
 import com.github.redouane64.models.ApiError
 import com.github.redouane64.models.ApiToken
 import com.github.redouane64.models.LoginCredentials
+import com.github.redouane64.models.RegisterForm
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +17,37 @@ class AccountService(private val apiClient: ApiClient) {
               onSuccess: (ApiToken) -> Unit,
               onFailure: (ApiError) -> Unit) {
         apiClient.login(credentials).enqueue(LoginCallback(onSuccess, onFailure));
+    }
+
+    fun register(form: RegisterForm,
+                 onFailure: (ApiError) -> Unit,
+                 onSuccess: (RegisterForm) -> Unit) {
+        apiClient.register(form).enqueue(RegisterCallback(onSuccess, onFailure));
+    }
+
+    private class RegisterCallback(
+        private val onSuccess: (RegisterForm) -> Unit,
+        private val onFailure: (ApiError) -> Unit
+    ): Callback<RegisterForm> {
+
+        override fun onFailure(call: Call<RegisterForm>, t: Throwable) {
+            onFailure(ApiError(t.message ?: "Something went wrong."));
+        }
+
+        override fun onResponse(call: Call<RegisterForm>, response: Response<RegisterForm>) {
+            if(response.code() == ApiClient.OkStatusCode)
+            {
+                if(response.body() != null) {
+                    onSuccess(response.body()!!);
+                } else {
+                    Log.d(TasksService.TAG, "Missing data: body returned is empty.");
+                    onFailure(ApiError("Something went wrong."))
+                }
+            } else {
+                // TODO:
+            }
+        }
+
     }
 
     private class LoginCallback(

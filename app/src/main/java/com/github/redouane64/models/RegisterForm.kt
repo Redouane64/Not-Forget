@@ -1,6 +1,9 @@
 package com.github.redouane64.models
 
-class RegisterForm(val username: String,
+import com.google.gson.annotations.SerializedName
+
+class RegisterForm(val name: String,
                    val email: String,
-                   val password: String) {
+                   val password: String,
+                   @SerializedName("api_token")val token: String?) {
 }

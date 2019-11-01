@@ -1,6 +1,7 @@
 package com.github.redouane64.presenters.login
 
 import com.github.redouane64.R
+import com.github.redouane64.infrastructure.Constants.API_TOKEN
 import com.github.redouane64.models.ApiError
 import com.github.redouane64.models.ApiToken
 import com.github.redouane64.models.LoginCredentials
@@ -12,10 +13,6 @@ import com.github.redouane64.views.login.LoginView
 class LoginPresenter(var view: LoginView?,
                      var accountService: AccountService,
                      var keyValueStore: PersistenceService) : BasePresenter {
-
-    companion object {
-        const val API_TOKEN = "API_TOKEN";
-    }
 
     override fun onDestroy() {
         view = null;

@@ -5,25 +5,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.redouane64.infrastructure.ApiClient
+import com.github.redouane64.infrastructure.DialogProvider
 import com.github.redouane64.infrastructure.TasksListAdapter
 import com.github.redouane64.models.Task
 import com.github.redouane64.presenters.tasks.TasksPresenter
 import com.github.redouane64.services.SharedPreferencesStore
 import com.github.redouane64.services.TasksService
 import com.github.redouane64.views.tasks.TasksView
-
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_tasks.*
-import kotlinx.android.synthetic.main.activity_tasks.view.*
 import kotlinx.android.synthetic.main.content_tasks.*
 
 class TasksActivity : AppCompatActivity(), TasksView {
 
     private lateinit var presenter: TasksPresenter;
     private lateinit var tasksListAdapter: TasksListAdapter;
+    private lateinit var dialogProvider: DialogProvider;
+
+    override fun getDialogProvider(): DialogProvider {
+        return this.dialogProvider;
+    }
 
     override fun logOut() {
         this.presenter.logOut();

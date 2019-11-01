@@ -2,6 +2,7 @@ package com.github.redouane64.infrastructure
 
 import com.github.redouane64.models.ApiToken
 import com.github.redouane64.models.LoginCredentials
+import com.github.redouane64.models.RegisterForm
 import com.github.redouane64.models.Task
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -13,6 +14,10 @@ interface ApiClient {
     @Headers("Accept: application/json")
     @POST("login")
     fun login(@Body credentials: LoginCredentials): Call<ApiToken>
+
+    @Headers("Accept: application/json")
+    @POST("register")
+    fun register(@Body form: RegisterForm): Call<RegisterForm>
 
     @GET("tasks")
     fun getTasks(@Header("Authorization") token: String): Call<List<Task>>;
