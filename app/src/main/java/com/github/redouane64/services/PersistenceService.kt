@@ -7,5 +7,6 @@ package com.github.redouane64.services
 interface PersistenceService {
     fun save(key: String, value: Any);
     fun <T> retrieve(key: String, clazz: Class<T>) : T?;
+    fun remove(key: String);
 }
 

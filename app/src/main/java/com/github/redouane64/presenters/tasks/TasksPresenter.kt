@@ -29,4 +29,9 @@ class TasksPresenter(private var view: TasksView?,
     private fun onTasksFailure(error: ApiError) {
         this.view?.displayTasks(listOf());
     }
+
+    fun logOut() {
+        // remove stored token.
+        keyValueStore.remove(LoginPresenter.API_TOKEN);
+    }
 }

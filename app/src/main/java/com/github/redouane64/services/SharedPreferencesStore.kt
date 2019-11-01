@@ -5,6 +5,12 @@ import android.content.SharedPreferences
 // Key/Value store implementation that uses Android SharedPreferences.
 class SharedPreferencesStore(private val store: SharedPreferences) :
     PersistenceService {
+    override fun remove(key: String) {
+        with(store.edit()) {
+            remove(key);
+            apply();
+        }
+    }
 
     override fun save(key: String, value: Any) {
         with(store.edit()) {

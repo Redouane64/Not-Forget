@@ -7,4 +7,10 @@
     <string name="login_succeeded">Logged in successfully.</string>
     <string name="logged_in">Logged in.</string>
     <string name="title_activity_tasks">Not Forgot!</string>
+    <string name="register">Register</string>
+    <string name="logout_menu_title">Log out</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_repeat_password">Repeat Password</string>
+    <string name="hint_e_mail">E-mail</string>
+    <string name="hint_name">Name</string>
 </resources>

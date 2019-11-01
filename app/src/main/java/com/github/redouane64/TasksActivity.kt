@@ -1,7 +1,10 @@
 package com.github.redouane64
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,12 +17,22 @@ import com.github.redouane64.services.TasksService
 import com.github.redouane64.views.tasks.TasksView
 
 import kotlinx.android.synthetic.main.activity_tasks.*
+import kotlinx.android.synthetic.main.activity_tasks.view.*
 import kotlinx.android.synthetic.main.content_tasks.*
 
 class TasksActivity : AppCompatActivity(), TasksView {
 
     private lateinit var presenter: TasksPresenter;
     private lateinit var tasksListAdapter: TasksListAdapter;
+
+    override fun logOut() {
+        this.presenter.logOut();
+
+        // navigate to login activity
+        val intent = Intent(this, LoginActivity::class.java);
+        startActivity(intent);
+        finish();
+    }
 
     override fun setPresenter(presenter: TasksPresenter) {
         this.presenter = presenter;
@@ -33,7 +46,9 @@ class TasksActivity : AppCompatActivity(), TasksView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks)
-        setActionBar(toolbar)
+        setSupportActionBar(toolbar)
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitleTextColor(getColor(R.color.white));
 
         addTaskButton.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -51,6 +66,19 @@ class TasksActivity : AppCompatActivity(), TasksView {
         this.tasksList.layoutManager = LinearLayoutManager(this);
         this.tasksListAdapter = TasksListAdapter();
         this.tasksList.adapter = this.tasksListAdapter;
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.logoutMenuItem) {
+            this.logOut();
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

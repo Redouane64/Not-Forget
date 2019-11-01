@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Toolbar android:title="@string/title_activity_tasks"
+        <androidx.appcompat.widget.Toolbar
+            android:title="@string/title_activity_tasks"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/main_orange"
-            android:titleTextColor="@color/white"/>
+            android:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -14,6 +14,10 @@ import com.github.redouane64.services.PersistenceService
 import com.github.redouane64.services.SharedPreferencesStore
 import com.github.redouane64.views.login.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.emailEditText
+import kotlinx.android.synthetic.main.activity_login.loginButton
+import kotlinx.android.synthetic.main.activity_login.passwordEditText
+import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity(), LoginView {
 
@@ -21,6 +25,11 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun login(credentials: LoginCredentials) {
         this.presenter.login(credentials);
+    }
+
+    override fun register() {
+        val intent = Intent(this, RegisterActivity::class.java);
+        this.startActivity(intent);
     }
 
     override fun canLogin(): Boolean {
@@ -101,6 +110,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
                 this.showMessage(R.string.enter_your_login)
             }
 
+        }
+
+        signUpbutton.setOnClickListener {
+            this.register();
         }
 
         // check if user logged in.

@@ -14,4 +14,5 @@ interface LoginView : BaseView<LoginPresenter> {
     fun enableLoginButton();
     fun disableLoginButton();
     fun skipLogin();
+    fun register();
 }

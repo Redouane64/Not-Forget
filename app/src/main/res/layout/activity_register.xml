@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_orange"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity"
+    android:background="@color/main_orange">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -25,10 +26,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login_title"
+                android:text="@string/register"
                 android:textColor="@color/main_orange"
                 android:textSize="32sp"
                 android:layout_marginBottom="20dp"/>
+
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/emailEditText"
@@ -49,20 +59,30 @@
                 android:singleLine="true"
                 android:textSize="20sp" />
 
+            <EditText
+                android:id="@+id/repeatPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:hint="@string/hint_repeat_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="20sp" />
+
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/registerButton"
                 style="@style/enabledButton"
                 android:backgroundTint="@color/button_tint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_title" />
+                android:text="@string/register" />
 
             <Button
-                android:id="@+id/signUpbutton"
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey"
-                android:text="@string/sign_in"
+                android:text="@string/login_title"
                 android:textColor="@color/dark_grey"
                 android:elevation="8dp"/>
 
