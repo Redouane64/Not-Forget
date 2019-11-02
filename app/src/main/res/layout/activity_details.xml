@@ -61,8 +61,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="false"
             android:gravity="end"
-            android:text="Not Done"
-            android:textColor="@color/red" />
+            android:text="Not Done"/>
 
     </RelativeLayout>
 

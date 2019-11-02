@@ -1,6 +1,7 @@
 package com.github.redouane64
 
 import android.content.res.Resources
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -27,13 +28,41 @@ class DetailsActivity : AppCompatActivity(), TaskDetailsView {
     override fun setTask(task: Task) {
         this.taskTitle.text = task.title;
         this.taskDescription.text = task.description;
-        this.priority.text = task.priority?.name;
-        this.category.text = task.category?.name;
-        this.status.setText(when(task.done) {
-            0 -> R.string.task_undone;
-            1 -> R.string.task_done;
-            else -> R.string.na;
-        });
+
+        with(this.priority) {
+
+            if (task.priority != null) {
+                text = task.priority?.name;
+                setBackgroundColor(Color.parseColor(task.priority?.color));
+            }
+            else {
+                setText(R.string.na);
+                setBackgroundColor(Color.parseColor("#eeeeee"));
+            }
+        }
+
+        if(task.category != null)
+            this.category.text = task.category?.name;
+        else
+            this.category.setText(R.string.na);
+
+        with(this.status) {
+
+            val text = when (task.done) {
+                0 -> R.string.task_undone;
+                1 -> R.string.task_done;
+                else -> R.string.na;
+            };
+
+            val color = when (task.done) {
+                0 -> R.color.red;
+                1 -> R.color.green;
+                else -> R.color.grey;
+            }
+
+            setText(text);
+            setTextColor(color);
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
