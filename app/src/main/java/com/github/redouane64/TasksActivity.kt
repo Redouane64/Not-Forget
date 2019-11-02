@@ -16,6 +16,7 @@ import com.github.redouane64.services.SharedPreferencesStore
 import com.github.redouane64.services.TasksService
 import com.github.redouane64.views.tasks.TasksView
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_tasks.*
 import kotlinx.android.synthetic.main.content_tasks.*
 
@@ -24,6 +25,14 @@ class TasksActivity : AppCompatActivity(), TasksView {
     private lateinit var presenter: TasksPresenter;
     private lateinit var tasksListAdapter: TasksListAdapter;
     private lateinit var dialogProvider: DialogProvider;
+
+    override fun itemClicked(task: Task) {
+        val intent = Intent(this, DetailsActivity::class.java);
+        val taskJson = Gson().toJson(task);
+        intent.putExtra("task", taskJson);
+
+        startActivity(intent);
+    }
 
     override fun getDialogProvider(): DialogProvider {
         return this.dialogProvider;
@@ -41,6 +50,8 @@ class TasksActivity : AppCompatActivity(), TasksView {
     override fun setPresenter(presenter: TasksPresenter) {
         this.presenter = presenter;
     }
+
+    private val func: (Task) -> Unit =  { itemClicked(it) };
 
     override fun displayTasks(tasks: List<Task>) {
         this.tasksListAdapter.isLoading = false;
@@ -68,7 +79,7 @@ class TasksActivity : AppCompatActivity(), TasksView {
         this.presenter.fetchTasks();
 
         this.tasksList.layoutManager = LinearLayoutManager(this);
-        this.tasksListAdapter = TasksListAdapter();
+        this.tasksListAdapter = TasksListAdapter(func);
         this.tasksList.adapter = this.tasksListAdapter;
     }
 

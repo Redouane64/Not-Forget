@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.redouane64.R
 import com.github.redouane64.models.Task
 
-class TasksListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TasksListAdapter(
+        private val itemClicked: (Task) -> Unit
+    ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val EMPTY_VIEW = 0;
     private val LOADING = 1
@@ -22,14 +24,11 @@ class TasksListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        val v = when(viewType) {
+        return when(viewType) {
             0 -> NoTasksViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_empty_item, parent, false));
             1 -> LoadingTasksViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_loading_item, parent, false));
             else -> TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false));
         }
-
-        return v;
     }
 
     override fun getItemCount(): Int {
@@ -47,6 +46,7 @@ class TasksListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.setTitle(task.title);
             holder.setDescription(task.description);
             holder.setStatus(task.done);
+            holder.setClickListener({ this.itemClicked(it) }, task);
         }
 
     }

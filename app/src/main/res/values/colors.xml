@@ -8,4 +8,7 @@
     <color name="dark_grey">#505050</color>
     <color name="white">#ffffff</color>
     <color name="task_title_color">#000000</color>
+    <color name="light_grey">#FDFDFD</color>
+    <color name="red">#ff0000</color>
+    <color name="red_light">#FC4040</color>
 </resources>

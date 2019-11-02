@@ -7,4 +7,5 @@ import com.github.redouane64.views.BaseView
 interface TasksView : BaseView<TasksPresenter> {
     fun displayTasks(tasks: List<Task>);
     fun logOut();
+    fun itemClicked(task: Task);
 }
