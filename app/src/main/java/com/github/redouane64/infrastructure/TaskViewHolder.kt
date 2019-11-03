@@ -1,8 +1,11 @@
 package com.github.redouane64.infrastructure
 
+import android.graphics.Color
 import android.view.View
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
+import com.github.redouane64.models.Category
+import com.github.redouane64.models.Priority
 import com.github.redouane64.models.Task
 import kotlinx.android.synthetic.main.task_item.view.*
 
@@ -17,6 +20,14 @@ class TaskViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun setCheckedListener(checkListener: (Task, Int, CheckBox) -> Unit, task: Task, position: Int) {
         view.taskDoneCheckBox.setOnClickListener {
             checkListener(task, position,(it as CheckBox));
+        }
+    }
+    fun setTaskPriority(priority: Priority?) {
+        if (priority != null) {
+            view.taskItem.setBackgroundColor(Color.parseColor(priority.color));
+        } else
+        {
+            view.taskItem.setBackgroundColor(Color.WHITE);
         }
     }
 }

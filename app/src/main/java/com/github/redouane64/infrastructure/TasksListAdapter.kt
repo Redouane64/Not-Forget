@@ -55,6 +55,7 @@ class TasksListAdapter(
             holder.setStatus(task.done);
             holder.setClickListener({ this.itemClicked(it) }, task);
             holder.setCheckedListener(itemCheckListener, task, position);
+            holder.setTaskPriority(task.priority);
         }
 
     }
