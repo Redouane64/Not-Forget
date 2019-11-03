@@ -6,6 +6,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/empty_list_placeholder"
+        android:src="@drawable/empty_list_placeholder_x2"
         android:padding="@dimen/placeholder_padding"/>
 </LinearLayout>
