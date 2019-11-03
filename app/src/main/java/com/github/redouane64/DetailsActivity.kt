@@ -1,11 +1,11 @@
 package com.github.redouane64
 
-import android.content.res.Resources
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.github.redouane64.infrastructure.DialogProvider
+import com.github.redouane64.models.Category
+import com.github.redouane64.models.Priority
 import com.github.redouane64.models.Task
 import com.github.redouane64.presenters.tasks.TaskDetailPresenter
 import com.github.redouane64.views.tasks.TaskDetailsView
@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_details.*
 class DetailsActivity : AppCompatActivity(), TaskDetailsView {
 
     private lateinit var presenter: TaskDetailPresenter;
-    private lateinit var task: Task;
 
     override fun setPresenter(presenter: TaskDetailPresenter) {
         this.presenter = presenter;
@@ -25,43 +24,44 @@ class DetailsActivity : AppCompatActivity(), TaskDetailsView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun setTask(task: Task) {
-        this.taskTitle.text = task.title;
-        this.taskDescription.text = task.description;
+    override fun setTaskTitle(title: String?) {
+        this.taskTitle.text = title;
+    }
 
+    override fun setTaskDescription(description: String?) {
+        this.taskDescription.text = description;
+    }
+
+    override fun setPriority(priority: Priority?) {
         with(this.priority) {
-
-            if (task.priority != null) {
-                text = task.priority?.name;
-                setBackgroundColor(Color.parseColor(task.priority?.color));
+            if (priority != null) {
+                text = priority.name;
+                setBackgroundColor(Color.parseColor(priority.color));
             }
             else {
                 setText(R.string.na);
                 setBackgroundColor(Color.parseColor("#eeeeee"));
             }
         }
+    }
 
-        if(task.category != null)
-            this.category.text = task.category?.name;
+    override fun setCategory(category: Category?) {
+        if(category != null)
+            this.category.text = category.name;
         else
             this.category.setText(R.string.na);
+    }
+
+    override fun setTaskStatus(status: Int) {
 
         with(this.status) {
-
-            val text = when (task.done) {
-                0 -> R.string.task_undone;
-                1 -> R.string.task_done;
-                else -> R.string.na;
+            val (text, color) = when (status) {
+                0 -> Pair(R.string.task_undone, R.color.red);
+                1 -> Pair(R.string.task_done, R.color.green);
+                else -> Pair(R.string.na, R.color.grey);
             };
-
-            val color = when (task.done) {
-                0 -> R.color.red;
-                1 -> R.color.green;
-                else -> R.color.grey;
-            }
-
             setText(text);
-            setTextColor(color);
+            setTextColor(resources.getColor(color, null));
         }
     }
 
@@ -73,10 +73,9 @@ class DetailsActivity : AppCompatActivity(), TaskDetailsView {
         toolbar.setTitleTextColor(getColor(R.color.white));
         toolbar.setNavigationOnClickListener { finish(); }
 
-        this.setTask(Gson().fromJson(intent.getStringExtra("task"), Task::class.java));
+        this.setPresenter(TaskDetailPresenter(this));
+        this.presenter.setTask(Gson().fromJson(intent.getStringExtra("task"), Task::class.java));
+        this.presenter.displayTask();
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
 }
