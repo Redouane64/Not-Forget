@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
     <ImageView
+        android:id="@+id/image_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:src="@drawable/empty_list_placeholder_x2"
         android:padding="@dimen/placeholder_padding"/>
-</LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/image_placeholder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-64dp"
+        android:gravity="center"
+        android:text="@string/no_item_text"
+        android:textSize="@dimen/no_item_placeholder_text_size"
+        android:typeface="sans" />
+</RelativeLayout>

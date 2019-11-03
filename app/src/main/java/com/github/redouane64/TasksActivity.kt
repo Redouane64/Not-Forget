@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_tasks.*
 import kotlinx.android.synthetic.main.content_tasks.*
+import kotlinx.android.synthetic.main.task_item.*
 
 class TasksActivity : AppCompatActivity(), TasksView {
 
@@ -32,6 +33,11 @@ class TasksActivity : AppCompatActivity(), TasksView {
         intent.putExtra("task", taskJson);
 
         startActivity(intent);
+    }
+
+    override fun itemCheckToggled(task: Task) {
+        task.done = if (this.taskDoneCheckBox.isChecked) 1 else 0;
+        this.presenter.updateTask(task);
     }
 
     override fun getDialogProvider(): DialogProvider {
@@ -52,6 +58,7 @@ class TasksActivity : AppCompatActivity(), TasksView {
     }
 
     private val func: (Task) -> Unit =  { itemClicked(it) };
+    private val itemToggled: (Task) -> Unit = { itemCheckToggled(it) };
 
     override fun displayTasks(tasks: List<Task>) {
         this.tasksListAdapter.isLoading = false;
@@ -70,6 +77,8 @@ class TasksActivity : AppCompatActivity(), TasksView {
                 .setAction("Action", null).show()
         }
 
+        this.dialogProvider = DialogProvider(this);
+
         val tasksPresenter = TasksPresenter(this,
             SharedPreferencesStore(this.getSharedPreferences("LOGIN", Context.MODE_PRIVATE)),
             TasksService(ApiClient.create())
@@ -79,7 +88,7 @@ class TasksActivity : AppCompatActivity(), TasksView {
         this.presenter.fetchTasks();
 
         this.tasksList.layoutManager = LinearLayoutManager(this);
-        this.tasksListAdapter = TasksListAdapter(func);
+        this.tasksListAdapter = TasksListAdapter(func, itemToggled);
         this.tasksList.adapter = this.tasksListAdapter;
     }
 
@@ -101,4 +110,15 @@ class TasksActivity : AppCompatActivity(), TasksView {
         super.onDestroy()
     }
 
+    override fun showTaskSetToDoneMessage() {
+        this.dialogProvider.showMessage(R.string.task_setto_done);
+    }
+
+    override fun showTaskUpdateFailedMessage() {
+        this.dialogProvider.showErrorMessage(R.string.update_task_failed);
+    }
+
+    override fun setTaskUnDone() {
+        this.taskDoneCheckBox.isChecked = false;
+    }
 }

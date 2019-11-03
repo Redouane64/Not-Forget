@@ -2,12 +2,14 @@ package com.github.redouane64.infrastructure
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.github.redouane64.R
 import com.github.redouane64.models.Task
 
 class TasksListAdapter(
-        private val itemClicked: (Task) -> Unit
+        private val itemClicked: (Task) -> Unit,
+        private val itemCheckToggled: (Task) -> Unit
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val EMPTY_VIEW = 0;
@@ -21,6 +23,11 @@ class TasksListAdapter(
         this.tasks.clear();
         this.tasks.addAll(tasks);
         this.notifyDataSetChanged();
+    }
+
+    private fun setTaskStatus(index: Int, status: Int) {
+        this.tasks[index].done = status;
+        this.notifyItemChanged(index);
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -47,7 +54,13 @@ class TasksListAdapter(
             holder.setDescription(task.description);
             holder.setStatus(task.done);
             holder.setClickListener({ this.itemClicked(it) }, task);
+            holder.setCheckedListener(itemCheckListener, task, position);
         }
 
+    }
+
+    private val itemCheckListener : (Task, Int, CheckBox) ->  Unit = { task, position, checkBox ->
+        this.itemCheckToggled(task);
+        this.setTaskStatus(position, when(checkBox.isChecked) { true -> 1 else -> 0 });
     }
 }

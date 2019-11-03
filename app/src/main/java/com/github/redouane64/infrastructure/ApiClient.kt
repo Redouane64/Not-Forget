@@ -28,6 +28,9 @@ interface ApiClient {
     @DELETE("tasks")
     fun removeTask(@Header("Authorization") token: String, @Path("{id}") id: Int);
 
+    @PATCH("tasks/{id}")
+    fun updateTask(@Header("Authorization") token: String, @Path("id") id: Int, @Body task: Task): Call<Task>;
+
     companion object {
 
         private var instance : ApiClient? = null;

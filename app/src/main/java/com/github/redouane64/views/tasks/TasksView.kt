@@ -8,4 +8,8 @@ interface TasksView : BaseView<TasksPresenter> {
     fun displayTasks(tasks: List<Task>);
     fun logOut();
     fun itemClicked(task: Task);
+    fun itemCheckToggled(task: Task);
+    fun showTaskUpdateFailedMessage();
+    fun showTaskSetToDoneMessage();
+    fun setTaskUnDone();
 }

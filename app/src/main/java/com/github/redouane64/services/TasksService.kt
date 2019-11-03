@@ -30,6 +30,39 @@ class TasksService(private val apiClient: ApiClient) {
 
     }
 
+    // For some reason, the server does not update the value of done.
+    fun updateTask(token: String,
+                   task: Task,
+                   onFailure: (ApiError) -> Unit,
+                   onSuccess: (Task) -> Unit) {
+        apiClient.updateTask("${ApiClient.AuthenticationSchema} $token"
+            , task.id, task).enqueue(UpdateTaskCallback(onFailure, onSuccess));
+    }
+
+    private class UpdateTaskCallback(
+            private val onFailure: (ApiError) -> Unit,
+            private val onSuccess: (Task) -> Unit
+        ) : Callback<Task> {
+
+        override fun onFailure(call: Call<Task>, t: Throwable) {
+            onFailure(ApiError(t.message ?: "Unable to resolve host."))
+        }
+
+        override fun onResponse(call: Call<Task>, response: Response<Task>) {
+            if(response.code() == ApiClient.OkStatusCode) {
+                if(response.body() != null)
+                    onSuccess(response.body()!!);
+                else {
+                    Log.d(TAG, "Missing data: body returned is empty.");
+                    onFailure(ApiError("Something went wrong."))
+                }
+            } else {
+                // TODO: Handle other status code responses.
+            }
+        }
+
+    }
+
     private class GetTasksListCallback(
             private val onFailure: (ApiError) -> Unit,
             private val onSuccess: (List<Task>) -> Unit

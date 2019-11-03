@@ -20,4 +20,7 @@
     <string name="task_undone">Not done</string>
     <string name="task_done">Done</string>
     <string name="na">N/A</string>
+    <string name="no_item_text">You have not some tasks.</string>
+    <string name="update_task_failed">Failed complete operation.</string>
+    <string name="task_setto_done">Task updated successfully.</string>
 </resources>

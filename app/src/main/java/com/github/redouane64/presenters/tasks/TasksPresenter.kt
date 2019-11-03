@@ -22,6 +22,22 @@ class TasksPresenter(private var view: TasksView?,
 
     }
 
+    fun updateTask(task: Task) {
+        val token = keyValueStore.retrieve(API_TOKEN, String::class.java);
+        tasksService.updateTask(token!!, task,
+            { error -> onTaskUpdateFailure(error) },
+            { task: Task -> onTaskUpdateSuccess(task) });
+    }
+
+    private fun onTaskUpdateFailure(error: ApiError) {
+        this.view?.showTaskUpdateFailedMessage();
+        this.view?.setTaskUnDone();
+    }
+
+    private fun onTaskUpdateSuccess(task: Task) {
+        this.view?.showTaskSetToDoneMessage();
+    }
+
     private fun onTasksFetched(tasks: List<Task>) {
         this.view?.displayTasks(tasks);
     }

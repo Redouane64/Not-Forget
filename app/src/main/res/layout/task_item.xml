@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:clickable="false"
+            android:clickable="true"
             android:background="@color/white" />
 
     </RelativeLayout>
