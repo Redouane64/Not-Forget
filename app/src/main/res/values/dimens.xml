@@ -4,4 +4,7 @@
     <dimen name="placeholder_padding">16dp</dimen>
     <dimen name="desc_text_padding">16dp</dimen>
     <dimen name="priority_text_size">16sp</dimen>
+    <dimen name="desc_text_size">20sp</dimen>
+    <dimen name="priority_card_padding_vert">4dp</dimen>
+    <dimen name="priority_card_padding_horz">12dp</dimen>
 </resources>

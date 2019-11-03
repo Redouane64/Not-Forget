@@ -22,5 +22,6 @@ class TaskDetailPresenter(private var view: TaskDetailsView?): BasePresenter {
         view?.setTaskStatus(task.done!!.toInt());
         view?.setCategory(task.category);
         view?.setPriority(task.priority);
+        view?.setDate(task.created);
     }
 }

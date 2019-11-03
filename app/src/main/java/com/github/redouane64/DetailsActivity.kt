@@ -11,6 +11,8 @@ import com.github.redouane64.presenters.tasks.TaskDetailPresenter
 import com.github.redouane64.views.tasks.TaskDetailsView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_details.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailsActivity : AppCompatActivity(), TaskDetailsView {
 
@@ -63,6 +65,18 @@ class DetailsActivity : AppCompatActivity(), TaskDetailsView {
             setText(text);
             setTextColor(resources.getColor(color, null));
         }
+    }
+
+    override fun setDate(date: Long?) {
+
+        if (date == null) {
+            this.date.setText(R.string.na);
+        }
+
+        val date = Date(date!! * 1000L);
+        val dateFormat = SimpleDateFormat("dd.mm.yyyy");
+        val formattedDate = dateFormat.format(date);
+        this.date.text = formattedDate;
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

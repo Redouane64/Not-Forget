@@ -12,4 +12,5 @@ interface TaskDetailsView : BaseView<TaskDetailPresenter> {
     fun setPriority(priority: Priority?);
     fun setCategory(category: Category?)
     fun setTaskStatus(status: Int);
+    fun setDate(date: Long?);
 }
