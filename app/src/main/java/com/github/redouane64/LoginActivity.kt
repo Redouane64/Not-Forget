@@ -1,5 +1,9 @@
 package com.github.redouane64
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -64,6 +68,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AppCenter.start(getApplication(), "273a29d7-584b-4186-9c52-b6850767b234",
+                  Analytics.class, Crashes.class);
 
         // Apply AppTheme style.
         theme.applyStyle(R.style.AppTheme, true);
